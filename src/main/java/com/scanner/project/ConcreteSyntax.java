@@ -53,11 +53,11 @@ public class ConcreteSyntax {
 		for (int i = 0; i < header.length; i++){
 			// bypass " main { "
 			match(header[i]);
+
+		}
 			p.decpart=declarations();
 			p.body=statements();
 			match("}");
-		}
-		
 		return p;
 	}
 
