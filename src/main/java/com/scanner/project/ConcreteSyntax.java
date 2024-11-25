@@ -36,7 +36,7 @@ public class ConcreteSyntax {
 	// Match a string with the value of a token. If no problem, go to the next
 	// token otherwise generate an error message
 	private void match(String s) {
-		System.out.println(token.getValue());
+		//System.out.println(token.getValue());
 		if (token.getValue().equals(s))
 			token = input.nextToken();
 		else
@@ -87,7 +87,7 @@ public class ConcreteSyntax {
 		else if (token.getValue().equals("bool"))
 			t = new Type(token.getValue());
 		else
-			throw new RuntimeException(SyntaxError("int | boolean"));
+			throw new RuntimeException(SyntaxError("integer | boolean"));
 		token = input.nextToken(); // pass over the type
 		return t;
 	}
