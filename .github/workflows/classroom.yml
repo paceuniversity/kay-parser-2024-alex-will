@@ -18,7 +18,6 @@ jobs:
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: Parser Tests
-        setup-command: "./setup.sh"
         command: gradle test
         timeout: 10
     - name: Autograding Reporter
