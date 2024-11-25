@@ -52,12 +52,12 @@ public class ConcreteSyntax {
 		Program p = new Program();
 		for (int i = 0; i < header.length; i++){
 			// bypass " main { "
-			match(header[i]);
-
-		}
+			match(header[I]);
 			p.decpart=declarations();
 			p.body=statements();
 			match("}");
+		}
+		
 		return p;
 	}
 
