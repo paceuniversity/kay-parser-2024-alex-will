@@ -313,13 +313,16 @@ public class ConcreteSyntax {
 		c.test=expression();
 		match(")");
 		c.thenbranch=statement();
-		match("{");
+		//match("{");
 		if(token.getValue().equals("else"))
 		{
-			match("else");
+			//match("else");
+			token = input.nextToken();
 			c.elsebranch=statement();
 		}
-		match("}");
+		else{
+			c.elsebranch = null;
+		}
 	
 		return c;
 	}
