@@ -128,6 +128,7 @@ public class ConcreteSyntax {
 		} 
 		else if (token.getValue().equals("{"))
 		{ // Block
+			match("{");
 			token = input.nextToken();
 			s = statements();
 			match("}");
