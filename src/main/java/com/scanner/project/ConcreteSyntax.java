@@ -317,7 +317,6 @@ public class ConcreteSyntax {
 		{
 			match("else");
 			c.elsebranch=statement();
-			match("}");
 		}
 		else
 		{
