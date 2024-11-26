@@ -149,8 +149,7 @@ public class ConcreteSyntax {
 		// Block --> '{' Statements '}'
 		Block b = new Block();
 		while (!token.getValue().equals("}")) {
-			if(!(statement() instanceof Skip))
-				b.blockmembers.addElement(statement());
+			b.blockmembers.addElement(statement());
 		}
 		return b;
 	}
@@ -166,7 +165,7 @@ public class ConcreteSyntax {
 			match(token.getValue()); // oops 
 			match(":=");
 			a.source=expression();
-			//match(";");
+			match(";");
 			
 		} else
 			throw new RuntimeException(SyntaxError("Identifier"));
