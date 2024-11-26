@@ -121,14 +121,18 @@ public class ConcreteSyntax {
 	private Statement statement() {
 		// Statement --> ; | Block | Assignment | IfStatement | WhileStatement
 		Statement s = new Skip();
-		if (token.getValue().equals(";")) { // Skip
+		if (token.getValue().equals(";")) 
+		{ // Skip
 			token = input.nextToken();
 			return s;
-		} else if (token.getValue().equals("{")) { // Block
+		} 
+		else if (token.getValue().equals("{"))
+		{ // Block
 			token = input.nextToken();
 			s = statements();
 			match("}");
-		} else if (token.getValue().equals("if")) // IfStatement
+		} 
+		else if (token.getValue().equals("if")) // IfStatement
 			s = ifStatement();
 		else if (token.getValue().equals("while")) {
 			// WhileStatement
@@ -289,6 +293,7 @@ public class ConcreteSyntax {
 			e = v;
 			token = input.nextToken();
 		} else if (token.getValue().equals("(")) {
+			match("(");
 			token = input.nextToken();
 			e = expression();
 			match(")");
@@ -306,11 +311,13 @@ public class ConcreteSyntax {
 		c.test=expression();
 		match(")");
 		c.thenbranch=statement();
+		match("{");
 		if(token.getValue().equals("else"))
-				{
-					match("else");
-					c.elsebranch=statement();
-				}
+		{
+			match("else");
+			c.elsebranch=statement();
+		}
+		match("}");
 		else
 		{
 			c.elsebranch=null;
