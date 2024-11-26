@@ -128,7 +128,6 @@ public class ConcreteSyntax {
 		} 
 		else if (token.getValue().equals("{"))
 		{ // Block
-			match("{");
 			token = input.nextToken();
 			s = statements();
 			match("}");
@@ -150,12 +149,13 @@ public class ConcreteSyntax {
 		// Block --> '{' Statements '}'
 		Block b = new Block();
 		while (!token.getValue().equals("}")) {
-			b.blockmembers.addElement(statement());
+			if(!(statement() instanceof Skip))
+				b.blockmembers.addElement(statement());
 		}
 		return b;
 	}
 
-	private Assignment assignment() {
+	private Assignment assignment() {//---
 		// Assignment --> Identifier := Expression ;
 		Assignment a = new Assignment();
 		if (token.getType().equals("Identifier")) {
@@ -166,7 +166,7 @@ public class ConcreteSyntax {
 			match(token.getValue()); // oops 
 			match(":=");
 			a.source=expression();
-			match(";");
+			//match(";");
 			
 		} else
 			throw new RuntimeException(SyntaxError("Identifier"));
@@ -189,13 +189,13 @@ public class ConcreteSyntax {
 		return e;
 	}
 
-	private Expression conjunction() {
+	private Expression conjunction() {//----
 		// Conjunction --> Relation { && Relation }*
 		Binary b;
 		Expression e;
 		e = relation();
 		while (token.getValue().equals("&&")) {
-			match("&&");
+			//match("&&");
 			b = new Binary();
 			
 			// TODO TO BE COMPLETED
@@ -213,7 +213,8 @@ public class ConcreteSyntax {
 		Expression e;
 		e = addition();
 		// TODO TO BE COMPLETED
-		while (token.getValue().equals("<") || token.getValue().equals("<=")
+		while (token.getValue().equals("<") 
+		       		|| token.getValue().equals("<=")
 				|| token.getValue().equals(">=")
 				|| token.getValue().equals("==")
 				|| token.getValue().equals("<>")) {
@@ -221,7 +222,7 @@ public class ConcreteSyntax {
 			
 			b.term1=e;
 			b.op = new Operator(token.getValue());
-			match(token.getValue()); // if breaks remove this first 
+			//match(token.getValue()); // if breaks remove this first 
 			b.term2=addition();
 			e = b;
 		}
@@ -234,12 +235,13 @@ public class ConcreteSyntax {
 		Expression e;
 		e = term();
 		while (token.getValue().equals("+") || token.getValue().equals("-")) {
-            b = new Binary();
+            		b = new Binary();
 			
 			b.term1=e;
 			b.op = new Operator(token.getValue());
-			match(token.getValue()); // if breaks remove this first 
+			//match(token.getValue()); // if breaks remove this first 
 			b.term2=term();
+			e = b;
 		}
 		return e;
 	}
@@ -253,7 +255,7 @@ public class ConcreteSyntax {
 			b = new Binary();
 			b.term1=e;
 			b.op = new Operator(token.getValue());
-			match(token.getValue()); // if breaks remove this first 
+			//match(token.getValue()); // if breaks remove this first 
 			b.term2=negation();
 			e = b;
 		}
@@ -312,10 +314,10 @@ public class ConcreteSyntax {
 		c.test=expression();
 		match(")");
 		c.thenbranch=statement();
-		match("{");
+		//match("{");
 		if(token.getValue().equals("else"))
 		{
-			match("else");
+			//match("else");
 			c.elsebranch=statement();
 		}
 		else
