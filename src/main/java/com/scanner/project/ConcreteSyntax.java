@@ -1,4 +1,5 @@
 package com.scanner.project; 
+ 
 // ConcreteSyntax.java
 
 // Implementation of the Recursive Descent Parser algorithm
@@ -211,7 +212,7 @@ public class ConcreteSyntax {
 		while (token.getValue().equals("<") || token.getValue().equals("<=")
 				|| token.getValue().equals(">=")
 				|| token.getValue().equals("==")
-				|| token.getValue().equals("<>")) {
+				|| token.getValue().equals("<>")||token.getValue().equals(">")) {
 			b = new Binary();
 			
 			b.term1=e;
