@@ -283,9 +283,9 @@ public class ConcreteSyntax {
 			Value v = null;
 			if (isInteger(token.getValue()))
 				v = new Value((new Integer(token.getValue())).intValue());
-			else if (token.getValue().equals("true"))
+			else if (token.getValue().equals("True"))
 				v = new Value(true);
-			else if (token.getValue().equals("false"))
+			else if (token.getValue().equals("False"))
 				v = new Value(false);
 			else
 				throw new RuntimeException(SyntaxError("Literal"));
